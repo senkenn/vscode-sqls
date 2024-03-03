@@ -1,0 +1,14 @@
+ignorePaths:
+  - package-lock.yaml
+  - settings.json
+  - extensions.json
+  - "*.svg"
+words:
+  - biomejs
+  - esbuild
+  - lefthook
+  - quickstart
+  - senken
+  - senkenn
+  - Sqls
+  - vsix

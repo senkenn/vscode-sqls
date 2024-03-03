@@ -1,6 +1,6 @@
 **
 !resources
 !LICENSE*
-!out/main.js
+!out/extension.js
 !package.json
 !README.md

@@ -14,10 +14,10 @@
 	"categories": ["Programming Languages"],
 	"keywords": ["multi-root ready"],
 	"engines": {
-		"vscode": "^1.43.0"
+		"vscode": "^1.85.2"
 	},
 	"activationEvents": ["workspaceContains:**/*.sql", "onLanguage:sql"],
-	"main": "./out/extension",
+	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
 			"type": "object",
@@ -33,13 +33,13 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
-		"compile": "esbuild src/extension.ts --bundle --external:vscode --platform=node --outfile=out/extension",
+		"compile": "esbuild src/extension.ts --bundle --external:vscode --platform=node --outfile=out/extension.js",
 		"watch": "bun run compile --sourcemap --watch"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.5.3",
 		"@types/node": "^20.11.24",
-		"@types/vscode": "^1.87.0",
+		"@types/vscode": "^1.85.2",
 		"cspell": "^8.5.0",
 		"esbuild": "^0.20.1",
 		"lefthook": "^1.6.4",

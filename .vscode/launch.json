@@ -1,21 +1,18 @@
-// A launch configuration that compiles the extension and then opens it inside a new window
 {
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "🧩 Debug Extension",
 			"type": "extensionHost",
 			"request": "launch",
-			"name": "Launch Client",
-			"runtimeExecutable": "${execPath}",
 			"args": [
 				"--disable-extensions",
-				"--extensionDevelopmentPath=${workspaceRoot}"
+				"--extensionDevelopmentKind=node",
+				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
-			"outFiles": ["${workspaceRoot}/client/out/**/*.js"],
-			"preLaunchTask": {
-				"type": "npm",
-				"script": "watch"
-			}
+			"outFiles": ["${workspaceFolder}/out/**/*.js"],
+			"preLaunchTask": "npm: watch",
+			"sourceMapRenames": true
 		}
 	]
 }

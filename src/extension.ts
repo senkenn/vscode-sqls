@@ -1,4 +1,4 @@
-import { ExtensionContext } from "vscode";
+import { ExtensionContext, Uri, workspace } from "vscode";
 
 import {
 	LanguageClient,
@@ -7,13 +7,15 @@ import {
 } from "vscode-languageclient/node";
 
 import vscode = require("vscode");
+import { delimiter } from "path";
 
 let client: LanguageClient;
 
-export function activate(context: ExtensionContext) {
+export async function activate(context: ExtensionContext) {
 	const config = parseLanguageServerConfig();
+	const sqlsInPATH = await findSqlsInPath();
 	const serverOptions: ServerOptions = {
-		command: "sqls",
+		command: sqlsInPATH.fsPath,
 
 		args: [...config.flags],
 	};
@@ -24,11 +26,7 @@ export function activate(context: ExtensionContext) {
 		],
 	};
 
-	client = new LanguageClient(
-		"languageServerExample",
-		serverOptions,
-		clientOptions,
-	);
+	client = new LanguageClient("sqls", serverOptions, clientOptions);
 	client.start();
 }
 
@@ -49,4 +47,31 @@ export function parseLanguageServerConfig(): LanguageServerConfig {
 		flags: sqlsConfig.languageServerFlags || [],
 	};
 	return config;
+}
+
+async function findSqlsInPath(): Promise<Uri | undefined> {
+	const path = process.env.PATH;
+
+	if (!path) {
+		return;
+	}
+
+	for (const dir of path.split(delimiter)) {
+		const sqls = Uri.joinPath(Uri.file(dir), "sqls");
+		if (await fileExists(sqls)) {
+			return sqls;
+		}
+	}
+}
+
+async function fileExists(path: Uri) {
+	try {
+		await workspace.fs.stat(path);
+		return true;
+	} catch (err) {
+		if (err.code === "ENOENT" || err.code === "FileNotFound") {
+			return false;
+		}
+		throw err;
+	}
 }

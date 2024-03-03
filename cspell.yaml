@@ -1,14 +1,7 @@
 ignorePaths:
-  - package-lock.yaml
   - settings.json
   - extensions.json
   - "*.svg"
+  - package.json
 words:
-  - biomejs
-  - esbuild
-  - lefthook
-  - quickstart
-  - senken
-  - senkenn
-  - Sqls
-  - vsix
+  - lockb

@@ -1,57 +1,52 @@
 {
-  "name": "sqls",
-  "description": "SQL Language Server Extension for Visual Studio Code",
-  "author": "senken",
-  "license": "MIT",
-  "version": "0.1.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lighttiger2505/vscode-sqls"
-  },
-  "bugs": {
-    "url": "https://github.com/lighttiger2505/vscode-sqls"
-  },
-  "publisher": "lighttiger2505",
-  "categories": [
-    "Programming Languages"
-  ],
-  "keywords": [
-    "multi-root ready"
-  ],
-  "engines": {
-    "vscode": "^1.43.0"
-  },
-  "activationEvents": [
-    "workspaceContains:**/*.sql",
-    "onLanguage:sql"
-  ],
-  "main": "./client/out/extension",
-  "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "sqls",
-      "properties": {
-        "go.languageServerFlags": {
-          "type": "array",
-          "default": [],
-          "description": "Flags like -trace and -log to be used while running the language server."
-        }
-      }
-    }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -b",
-    "watch": "tsc -b -w",
-    "postinstall": "cd client && npm install && cd .."
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.5.3",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.24",
-    "cspell": "^8.5.0",
-    "lefthook": "^1.6.4",
-    "mocha": "^10.3.0",
-    "typescript": "^5.3.3"
-  }
+	"name": "sqls",
+	"description": "SQL Language Server Extension for Visual Studio Code",
+	"license": "MIT",
+	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/senkenn/vscode-sqls"
+	},
+	"bugs": {
+		"url": "https://github.com/senkenn/vscode-sqls"
+	},
+	"publisher": "senken",
+	"categories": ["Programming Languages"],
+	"keywords": ["multi-root ready"],
+	"engines": {
+		"vscode": "^1.43.0"
+	},
+	"activationEvents": ["workspaceContains:**/*.sql", "onLanguage:sql"],
+	"main": "./out/extension",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "sqls",
+			"properties": {
+				"go.languageServerFlags": {
+					"type": "array",
+					"default": [],
+					"description": "Flags like -trace and -log to be used while running the language server."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "esbuild src/extension.ts --bundle --external:vscode --platform=node --outfile=out/extension",
+		"watch": "bun run compile --sourcemap --watch"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.5.3",
+		"@types/node": "^20.11.24",
+		"@types/vscode": "^1.87.0",
+		"cspell": "^8.5.0",
+		"esbuild": "^0.20.1",
+		"lefthook": "^1.6.4",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^9.0.1"
+	},
+	"packageManager": "bun@1.0.29"
 }

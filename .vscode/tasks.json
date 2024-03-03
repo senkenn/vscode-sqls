@@ -3,31 +3,19 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "compile",
-			"group": "build",
-			"presentation": {
-				"panel": "dedicated",
-				"reveal": "never"
-			},
-			"problemMatcher": [
-				"$tsc"
-			]
-		},
-		{
-			"type": "npm",
 			"script": "watch",
 			"isBackground": true,
-			"group": {
-				"kind": "build",
-				"isDefault": true
+			"problemMatcher": "$ts-esbuild-watch",
+			"options": {
+				"cwd": "${workspaceFolder}"
 			},
 			"presentation": {
-				"panel": "dedicated",
-				"reveal": "never"
+				"echo": true,
+				"reveal": "always",
+				"showReuseMessage": false,
+				"clear": true
 			},
-			"problemMatcher": [
-				"$tsc-watch"
-			]
+			"group": "build"
 		}
 	]
 }
